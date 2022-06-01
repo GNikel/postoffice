@@ -1,0 +1,21 @@
+version: '3.5'
+
+networks:
+  default:
+    name: backend-net
+
+services:
+  post_backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfilelocal
+    container_name: backend
+    volumes:
+      - .:/var/www/html
+      - ./logs:/var/log
+    ports:
+      - "8080:80"
+    environment:
+      - APP_ENV=dev
+    networks:
+      - default
